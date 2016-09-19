@@ -1,3 +1,5 @@
+//package ReadXML;
+
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -6,6 +8,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+//transformer
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.dom.DOMSource; 
+import javax.xml.transform.stream.StreamResult;
+import static serverpack.mvWebService.callXML;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,16 +31,23 @@ import org.w3c.dom.NodeList;
 public class ReadXML {
     public static void main(String[] args) throws Exception {
         
-        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/MovieWebService/web/movies.xml");
-        
+        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
+        String filepath = "/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/Updatemovies.xml";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(xmlFile);
         
         NodeList nList = doc.getElementsByTagName("film");
         showNode(nList,60);
-
+        deleteElement(nList,"director",60);
+        deleteMovie(nList,60);
         
+         // Use a Transformer for output
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Transformer transformer = tFactory.newTransformer();
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(new File(filepath));//System.out);
+        transformer.transform(source, result);       
         
     }
     
@@ -83,6 +101,32 @@ public class ReadXML {
                       }  //end forLoop j
         }  //end forLoop i
     }  //end function
-
     
+    private static void deleteElement(NodeList nList, String delname, int nodeid){
+        Element nfilm = (Element) nList.item(nodeid-1);
+        Node delNode = nfilm.getElementsByTagName(delname).item(0);
+        nfilm.removeChild(delNode);
+        System.out.println("XML file delete element successfully");
+    }
+    
+    private static void deleteMovie(NodeList nList, int nodeid){
+        Element nfilm = (Element) nList.item(nodeid-1);
+        nfilm.getParentNode().removeChild(nfilm);
+        System.out.println("XML file delete movie successfully");
+    }
+    
+    private static void addElement(Document doc, String newname, String value, int nodeid) {
+            NodeList film = doc.getElementsByTagName("film");
+            Element nfilm = (Element) film.item(nodeid-1);
+            Element newElement = doc.createElement(newname);
+            newElement.appendChild(doc.createTextNode(value));
+            nfilm.appendChild(newElement);
+    }
+    
+    private static void updateElementValue(NodeList nList, String elementname, String newValue, int nodeid) {
+          Element nfilm =  (Element) nList.item(nodeid-1);
+          Node name = nfilm.getElementsByTagName(elementname).item(0).getFirstChild();
+          name.setNodeValue(newValue);             
+    }
+
 }
