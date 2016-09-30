@@ -37,12 +37,9 @@ public class mvWebService {
     /**
      * Web service operation
      */
-    public static NodeList callXML(int func) throws SAXException, IOException, ParserConfigurationException {
-        
-        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
-        
+    public static NodeList callXML(int func) throws SAXException, IOException, ParserConfigurationException {        
+        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");        
         try {
-
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(xmlFile);
@@ -109,7 +106,7 @@ public class mvWebService {
                 for (int i = 0; i<childtemp.getLength();i++){
                     Node child = childtemp.item(i);
                     NodeList childnode = child.getChildNodes();
-                    if (child.getNodeName()=="type1"){
+                    if (i==1){
                         result = String.format("%s%s: %s\n", result , temp.getNodeName(), child.getTextContent());
                     }else if (childnode.getLength()>0){
                         result = String.format("%s       %s\n", result, child.getTextContent());
@@ -136,11 +133,11 @@ public class mvWebService {
         Document doc = docBuilder.parse(xmlFile);
         NodeList nList = doc.getElementsByTagName("film"); 
         
+        
         String result = "XML file delete successfully";
         Element nfilm = (Element) nList.item(nodeID-1);
         nfilm.getParentNode().removeChild(nfilm);
-        // Use a Transformer for output
-        
+        // Use a Transformer for output        
         SaveXML(doc);    
         return result;
     }
@@ -153,5 +150,48 @@ public class mvWebService {
         DOMSource source = new DOMSource(doc);
         StreamResult result = new StreamResult(new File(filepath));//System.out);
         transformer.transform(source, result);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addMovie")
+    public String addMovie(@WebParam(name = "title") final String title, @WebParam(name = "year") final String year, @WebParam(name = "types") final String types, @WebParam(name = "time") int time, @WebParam(name = "director") final String director) throws Exception{
+        String result = "";
+        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse(xmlFile);
+        Element movie = (Element) doc.getDocumentElement();
+        Element newfilm = doc.createElement("film");
+        // Tranform Time: interger to String
+        String mins = time+" min";
+        // add Element to film
+        newfilm.appendChild(getMovieElement(doc, "title", title));
+        newfilm.appendChild(getMovieElement(doc, "year", year));
+        newfilm.appendChild(getMovieElement(doc, "types", ""));
+        newfilm.appendChild(getMovieElement(doc, "time", mins));
+        newfilm.appendChild(getMovieElement(doc, "director", director));
+        Element addtype = (Element) newfilm.getElementsByTagName("types").item(0);
+        // add element types movie
+        int index = 1;
+        for (String type: types.split(",")){
+            String name = "type"+index;
+            addtype.appendChild(getMovieElement(doc, name, type));
+            index++;
+        }
+        result = String.format("Title:%s-Year:%s-Types:%s-Time:%s-Director:%s", title,year,types,mins,director);
+
+        // add element film to movie 
+        movie.appendChild(newfilm);
+        SaveXML(doc);    
+        return result;
+    }
+    
+    private static Node getMovieElement(Document doc, String name, String value){
+        Element node = doc.createElement(name);
+        node.appendChild(doc.createTextNode(value));
+        System.out.println("Insert OK "+node.getTextContent());
+        return node;
     }
 }

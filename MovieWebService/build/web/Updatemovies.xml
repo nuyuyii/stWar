@@ -685,8 +685,8 @@
 		</types>
 		<time>130 min</time>
 		<director>Shane Black</director>
-	</film>
+	<boxset>$500</boxset></film>
 
 	
 
-</movies>
+<film><title>Pete's Dragon </title><year>2016</year><types><type1>AnimationAdventure</type1></types><time>102 min</time><director>David Lowery</director></film></movies>

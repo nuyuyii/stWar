@@ -18,6 +18,8 @@
             <input type="text" name="number"><br>
             <input type="submit" value="Invoke">
         </form>
+        
+        
           <%-- start web service invocation --%><hr/>
     <%
     try {
@@ -34,6 +36,6 @@
     %>
     <%-- end web service invocation --%><hr/>
   
-        
+      
     </body>
 </html>

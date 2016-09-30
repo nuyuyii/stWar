@@ -29,6 +29,7 @@ import static serverpack.mvWebService.callXML;
  * @author nuyuyii
  */
 public class ReadXML {
+    
     public static void main(String[] args) throws Exception {
         
         File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
@@ -41,7 +42,11 @@ public class ReadXML {
         showNode(nList,60);
         deleteElement(nList,"director",60);
         deleteMovie(nList,60);
-        
+        addMovie(doc, "boxset","$500",59);
+        showNode(nList,59);
+        //getMovie(doc, "1", "Paypal", "Payment", "1000");
+        getMovie(doc, "Pete's Dragon ", "2016", "Animation,Adventure", 102, "David Lowery");
+        showNode(nList,60);
          // Use a Transformer for output
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
@@ -54,16 +59,25 @@ public class ReadXML {
     private static void showNode(NodeList nList,int nodeid){
           Element nfilm = (Element) nList.item(nodeid-1);
           NodeList childfilm = nfilm.getChildNodes();
+          /*if (nfilm.getNodeType() == Node.ELEMENT_NODE) {
+              //Print each employee's detail
+              Element eElement = (Element) nfilm;
+              //System.out.println("Employee id : "    + eElement.getAttribute("id"));
+              System.out.println("First Name : "  + eElement.getElementsByTagName("firstName").item(0).getTextContent());
+              System.out.println("Last Name : "   + eElement.getElementsByTagName("lastName").item(0).getTextContent());
+              System.out.println("Location : "    + eElement.getElementsByTagName("location").item(0).getTextContent());
+          }*/
           for (int j= 0; j < childfilm.getLength(); j++){
             Node temp = childfilm.item(j);
+            //System.out.println(temp.getNodeName());
             NodeList childtemp = temp.getChildNodes();
             if(childtemp.getLength() > 1){
+                System.out.print(temp.getNodeName()+ ": ");                
                 for (int i = 0; i<childtemp.getLength();i++){
                     Node child = childtemp.item(i);
-                    NodeList childnode = child.getChildNodes();
-                    if (child.getNodeName()=="type1"){
-                        System.out.println(temp.getNodeName() + ": " 
-                                + child.getTextContent());
+                    NodeList childnode = child.getChildNodes();                    
+                    if (i==1){                        
+                        System.out.println(child.getTextContent());
                     }else if (childnode.getLength()>0){
                         System.out.println("       " 
                                 + child.getTextContent());
@@ -75,6 +89,7 @@ public class ReadXML {
                 System.out.println(temp.getNodeName() + ": " + temp.getTextContent());
             }
           }
+          System.out.println("-----------------");
     }
     
     private static void searchMovie(NodeList nList, String search){
@@ -128,5 +143,64 @@ public class ReadXML {
           Node name = nfilm.getElementsByTagName(elementname).item(0).getFirstChild();
           name.setNodeValue(newValue);             
     }
-
+    
+    private static void addMovie(Document doc, String newname, String value, int nodeid) {
+        NodeList film = doc.getElementsByTagName("film");
+        Element nfilm = (Element) film.item(nodeid-1);
+        Element newElement = doc.createElement(newname);
+        newElement.appendChild(doc.createTextNode(value));
+        //System.out.println("Insert OK");
+        nfilm.appendChild(newElement);
+    }
+    private static void getMovie(Document doc, String title, String year, String types, int time, String director) {
+        Element movie = (Element) doc.getDocumentElement();//getElementsByTagName("film");
+        Element newfilm = doc.createElement("film");
+        //newfilm.setAttribute("id", id);
+        String mins = time+" min";
+        newfilm.appendChild(getMovieElement(doc, "title", title));
+        newfilm.appendChild(getMovieElement(doc, "year", year));
+        newfilm.appendChild(getMovieElement(doc, "types", ""));
+        newfilm.appendChild(getMovieElement(doc, "time", mins));
+        newfilm.appendChild(getMovieElement(doc, "director", director));
+        Element addtype = (Element) newfilm.getElementsByTagName("types").item(0);
+        //Node addtype = 
+        int index = 1;
+        for (String type: types.split(",")){
+            String name = "type"+index;
+            addtype.appendChild(getMovieElement(doc, name, type));
+            index++;
+            //System.out.println(type);
+        }
+        // NodeList childfilm = newfilm.getChildNodes();
+        //System.out.println("-----"+newfilm.getTextContent());
+        movie.appendChild(newfilm);
+        //return company;
+    }
+    private static Node getMovieElement(Document doc, String name, String value){
+        Element node = doc.createElement(name);
+        node.appendChild(doc.createTextNode(value));
+        System.out.println("Insert OK "+node.getTextContent());
+        return node;
+    }
 }
+/*  for (int j= 0; j < childfilm.getLength(); j++){
+            Node temp = childfilm.item(j);
+            NodeList childtemp = temp.getChildNodes();
+            if(childtemp.getLength() > 1){
+                for (int i = 0; i<childtemp.getLength();i++){
+                    Node child = childtemp.item(i);
+                    NodeList childnode = child.getChildNodes();
+                    if (child.getNodeName()==""){
+                        System.out.println(temp.getNodeName() + ": " 
+                                + child.getTextContent());
+                    }else if (childnode.getLength()>0){
+                        System.out.println("       " 
+                                + child.getTextContent());
+                    }
+                }                
+            //We got more childs; Let's visit them as well
+            }else if(childtemp.getLength() > 0){
+                System.out.println(temp.getNodeName() + ": " + temp.getTextContent());
+            }
+          }
+          System.out.println("-----------------");*/

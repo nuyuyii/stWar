@@ -7,6 +7,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -26,21 +27,6 @@ public interface MvWebService {
 
     /**
      * 
-     * @param no
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getsqr", targetNamespace = "http://serverpack/", className = "serverpack.Getsqr")
-    @ResponseWrapper(localName = "getsqrResponse", targetNamespace = "http://serverpack/", className = "serverpack.GetsqrResponse")
-    @Action(input = "http://serverpack/mvWebService/getsqrRequest", output = "http://serverpack/mvWebService/getsqrResponse")
-    public int getsqr(
-        @WebParam(name = "no", targetNamespace = "")
-        int no);
-
-    /**
-     * 
      * @param password
      * @param username
      * @return
@@ -56,5 +42,92 @@ public interface MvWebService {
         String username,
         @WebParam(name = "password", targetNamespace = "")
         String password);
+
+    /**
+     * 
+     * @param no
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getsqr", targetNamespace = "http://serverpack/", className = "serverpack.Getsqr")
+    @ResponseWrapper(localName = "getsqrResponse", targetNamespace = "http://serverpack/", className = "serverpack.GetsqrResponse")
+    @Action(input = "http://serverpack/mvWebService/getsqrRequest", output = "http://serverpack/mvWebService/getsqrResponse")
+    public int getsqr(
+        @WebParam(name = "no", targetNamespace = "")
+        int no);
+
+    /**
+     * 
+     * @param nodeID
+     * @return
+     *     returns java.lang.String
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "serchbyID", targetNamespace = "http://serverpack/", className = "serverpack.SerchbyID")
+    @ResponseWrapper(localName = "serchbyIDResponse", targetNamespace = "http://serverpack/", className = "serverpack.SerchbyIDResponse")
+    @Action(input = "http://serverpack/mvWebService/serchbyIDRequest", output = "http://serverpack/mvWebService/serchbyIDResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://serverpack/mvWebService/serchbyID/Fault/Exception")
+    })
+    public String serchbyID(
+        @WebParam(name = "nodeID", targetNamespace = "")
+        int nodeID)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param nodeID
+     * @return
+     *     returns java.lang.String
+     * @throws Exception_Exception
+     */
+    @WebMethod(operationName = "DeleteMovie")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "DeleteMovie", targetNamespace = "http://serverpack/", className = "serverpack.DeleteMovie")
+    @ResponseWrapper(localName = "DeleteMovieResponse", targetNamespace = "http://serverpack/", className = "serverpack.DeleteMovieResponse")
+    @Action(input = "http://serverpack/mvWebService/DeleteMovieRequest", output = "http://serverpack/mvWebService/DeleteMovieResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://serverpack/mvWebService/DeleteMovie/Fault/Exception")
+    })
+    public String deleteMovie(
+        @WebParam(name = "nodeID", targetNamespace = "")
+        int nodeID)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param types
+     * @param year
+     * @param director
+     * @param time
+     * @param title
+     * @return
+     *     returns java.lang.String
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addMovie", targetNamespace = "http://serverpack/", className = "serverpack.AddMovie")
+    @ResponseWrapper(localName = "addMovieResponse", targetNamespace = "http://serverpack/", className = "serverpack.AddMovieResponse")
+    @Action(input = "http://serverpack/mvWebService/addMovieRequest", output = "http://serverpack/mvWebService/addMovieResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://serverpack/mvWebService/addMovie/Fault/Exception")
+    })
+    public String addMovie(
+        @WebParam(name = "title", targetNamespace = "")
+        String title,
+        @WebParam(name = "year", targetNamespace = "")
+        String year,
+        @WebParam(name = "types", targetNamespace = "")
+        String types,
+        @WebParam(name = "time", targetNamespace = "")
+        int time,
+        @WebParam(name = "director", targetNamespace = "")
+        String director)
+        throws Exception_Exception
+    ;
 
 }
