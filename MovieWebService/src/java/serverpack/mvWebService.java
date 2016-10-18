@@ -127,7 +127,7 @@ public class mvWebService {
     @WebMethod(operationName = "DeleteMovie")
     public String DeleteMovie(@WebParam(name = "nodeID") final int nodeID) throws Exception  {
         //NodeList nList = callXML();
-        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
+        File xmlFile = new File("web/movies.xml");
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(xmlFile);
@@ -143,7 +143,7 @@ public class mvWebService {
     }
     
     public static void SaveXML(Document doc)throws Exception  {
-        String filepath = "/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/UpdatemoviesSr.xml";
+        String filepath = "web/UpdatemoviesSr.xml";
         // Use a Transformer for output
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
@@ -158,7 +158,7 @@ public class mvWebService {
     @WebMethod(operationName = "addMovie")
     public String addMovie(@WebParam(name = "title") final String title, @WebParam(name = "year") final String year, @WebParam(name = "types") final String types, @WebParam(name = "time") int time, @WebParam(name = "director") final String director) throws Exception{
         String result = "";
-        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
+        File xmlFile = new File("web/movies.xml");
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(xmlFile);

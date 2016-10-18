@@ -32,8 +32,8 @@ public class ReadXML {
     
     public static void main(String[] args) throws Exception {
         
-        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
-        String filepath = "/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/Updatemovies.xml";
+        File xmlFile = new File("web/movies.xml");
+        String filepath = "web/Updatemovies.xml";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(xmlFile);
