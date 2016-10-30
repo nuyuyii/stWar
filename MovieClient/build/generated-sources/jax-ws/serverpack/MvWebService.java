@@ -27,6 +27,79 @@ public interface MvWebService {
 
     /**
      * 
+     * @param nodeID
+     * @return
+     *     returns java.lang.String
+     * @throws Exception_Exception
+     */
+    @WebMethod(operationName = "Edit")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "Edit", targetNamespace = "http://serverpack/", className = "serverpack.Edit")
+    @ResponseWrapper(localName = "EditResponse", targetNamespace = "http://serverpack/", className = "serverpack.EditResponse")
+    @Action(input = "http://serverpack/mvWebService/EditRequest", output = "http://serverpack/mvWebService/EditResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://serverpack/mvWebService/Edit/Fault/Exception")
+    })
+    public String edit(
+        @WebParam(name = "nodeID", targetNamespace = "")
+        int nodeID)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param types
+     * @param year
+     * @param director
+     * @param time
+     * @param title
+     * @param nodeID
+     * @return
+     *     returns java.lang.String
+     * @throws Exception_Exception
+     */
+    @WebMethod(operationName = "Save")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "Save", targetNamespace = "http://serverpack/", className = "serverpack.Save")
+    @ResponseWrapper(localName = "SaveResponse", targetNamespace = "http://serverpack/", className = "serverpack.SaveResponse")
+    @Action(input = "http://serverpack/mvWebService/SaveRequest", output = "http://serverpack/mvWebService/SaveResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://serverpack/mvWebService/Save/Fault/Exception")
+    })
+    public String save(
+        @WebParam(name = "nodeID", targetNamespace = "")
+        int nodeID,
+        @WebParam(name = "title", targetNamespace = "")
+        String title,
+        @WebParam(name = "year", targetNamespace = "")
+        String year,
+        @WebParam(name = "types", targetNamespace = "")
+        String types,
+        @WebParam(name = "time", targetNamespace = "")
+        String time,
+        @WebParam(name = "director", targetNamespace = "")
+        String director)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param search
+     * @param category
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "movie", targetNamespace = "http://serverpack/", className = "serverpack.Movie")
+    @ResponseWrapper(localName = "movieResponse", targetNamespace = "http://serverpack/", className = "serverpack.MovieResponse")
+    @Action(input = "http://serverpack/mvWebService/movieRequest", output = "http://serverpack/mvWebService/movieResponse")
+    public String movie(
+        @WebParam(name = "category", targetNamespace = "")
+        String category,
+        @WebParam(name = "search", targetNamespace = "")
+        String search);
+
+    /**
+     * 
      * @param password
      * @param username
      * @return

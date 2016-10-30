@@ -40,12 +40,13 @@ public class ReadXML {
         
         NodeList nList = doc.getElementsByTagName("film");
         showNode(nList,60);
-        deleteElement(nList,"director",60);
-        deleteMovie(nList,60);
-        addMovie(doc, "boxset","$500",59);
-        showNode(nList,59);
+        //deleteElement(nList,"director",60);
+        //deleteMovie(nList,60);
+        //addMovie(doc, "boxset","$500",59);
+        //showNode(nList,59);
         //getMovie(doc, "1", "Paypal", "Payment", "1000");
-        getMovie(doc, "Pete's Dragon ", "2016", "Animation,Adventure", 102, "David Lowery");
+        //getMovie(doc, "Pete's Dragon ", "2016", "Animation,Adventure", 102, "David Lowery");
+        editMoive(doc,"Pete's Dragon ", "201", "Animation,Adventure", 102, "David Lowery", 60);
         showNode(nList,60);
          // Use a Transformer for output
         TransformerFactory tFactory = TransformerFactory.newInstance();
@@ -63,7 +64,7 @@ public class ReadXML {
               //Print each employee's detail
               Element eElement = (Element) nfilm;
               //System.out.println("Employee id : "    + eElement.getAttribute("id"));
-              System.out.println("First Name : "  + eElement.getElementsByTagName("firstName").item(0).getTextContent());
+              System.out.println("First Namenfilm.removeChild(typ); : "  + eElement.getElementsByTagName("firstName").item(0).getTextContent());
               System.out.println("Last Name : "   + eElement.getElementsByTagName("lastName").item(0).getTextContent());
               System.out.println("Location : "    + eElement.getElementsByTagName("location").item(0).getTextContent());
           }*/
@@ -141,7 +142,53 @@ public class ReadXML {
     private static void updateElementValue(NodeList nList, String elementname, String newValue, int nodeid) {
           Element nfilm =  (Element) nList.item(nodeid-1);
           Node name = nfilm.getElementsByTagName(elementname).item(0).getFirstChild();
-          name.setNodeValue(newValue);             
+          name.setNodeValue(newValue);          
+          System.out.println("XML file update movie successfully");
+    }
+    
+    private static void editMoive(Document doc, String _title, String _year,String _types, int _time,String _director, int nodeid) {
+        NodeList nList = doc.getElementsByTagName("film");
+        String mins =_time+"min";
+        Element nfilm =  (Element) nList.item(nodeid-1);
+        Node title = nfilm.getElementsByTagName("title").item(0).getFirstChild();
+        title.setNodeValue(_title);
+        Node year = nfilm.getElementsByTagName("year").item(0).getFirstChild();
+        year.setNodeValue(_year);    
+        Node time = nfilm.getElementsByTagName("time").item(0).getFirstChild();
+        time.setNodeValue(mins);  
+        Node dir = nfilm.getElementsByTagName("director").item(0).getFirstChild();
+        dir.setNodeValue(_director);  
+        Node alltype = nfilm.getElementsByTagName("types").item(0);
+        //nfilm.removeChild(typ);
+        //nfilm.appendChild(getMovieElement(doc, "types", ""));
+        //Element alltype = (Element) nfilm.item();
+        NodeList atype = alltype.getChildNodes();
+        //deleteElement(atype,"type1", 0);
+        for (int i= 0; i < atype.getLength(); i++){ 
+            Node child = atype.item(i);
+            //Node up = atype.item(i);            
+            //NodeList childElement = child.getChildNodes();
+            if (child.getNodeName() == "type" ){
+                alltype.removeChild(child);
+            }/*else if(child.getNodeName() == "type2" ){
+                alltype.removeChild(child);
+            }else if(child.getNodeName() == "type3" ){
+                alltype.removeChild(child);
+            }*/
+              // for (int l=1; l<childElement.getLength();l++){
+                    System.out.println(child.getNodeName());
+              //  }
+            //}
+            System.out.println(child.getNodeName());
+            //alltype.removeChild(all);
+        }
+        for (String type: _types.split(",")){
+            String name = "type";//+index;
+            alltype.appendChild(getMovieElement(doc, name, type));
+        }
+        
+        //nfilm.removeChild(alltype);
+        System.out.println("XML file update movie successfully");
     }
     
     private static void addMovie(Document doc, String newname, String value, int nodeid) {
