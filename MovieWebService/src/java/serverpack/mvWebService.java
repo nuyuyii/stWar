@@ -35,7 +35,7 @@ import javax.xml.transform.stream.StreamResult;
 public class mvWebService {
 
     /**
-     * Web service operation
+     * Web service operation 
      */
     public static NodeList callXML(int func) throws SAXException, IOException, ParserConfigurationException {        
         File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");        
@@ -127,7 +127,7 @@ public class mvWebService {
     @WebMethod(operationName = "DeleteMovie")
     public String DeleteMovie(@WebParam(name = "nodeID") final int nodeID) throws Exception  {
         //NodeList nList = callXML();
-        File xmlFile = new File("web/movies.xml");
+        File xmlFile = new File("/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/movies.xml");
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(xmlFile);
@@ -137,13 +137,13 @@ public class mvWebService {
         String result = "XML file delete successfully";
         Element nfilm = (Element) nList.item(nodeID-1);
         nfilm.getParentNode().removeChild(nfilm);
-        // Use a Transformer for output        
+        //Use a Transformer for output        
         SaveXML(doc);    
         return result;
     }
     
     public static void SaveXML(Document doc)throws Exception  {
-        String filepath = "web/UpdatemoviesSr.xml";
+        String filepath = "/home/nuyuyii/NetBeansProjects/Pro_ST/MovieWebService/web/UpdatemoviesSr.xml";
         // Use a Transformer for output
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();

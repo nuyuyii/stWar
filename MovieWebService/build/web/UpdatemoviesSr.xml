@@ -675,17 +675,7 @@
 		<director>Jon Favreau</director>
 	</film>
 
-	<film>
-		<title>Iron Man3</title>
-		<year>2013</year>
-		<types>
-			<type1>Action</type1>
-			<type2>Adventure</type2>
-			<type3>Sci-Fi</type3>
-		</types>
-		<time>130 min</time>
-		<director>Shane Black</director>
-	</film>
+	
 
 	<film>
 		<title>The Avengers</title>
@@ -699,4 +689,4 @@
 		<director>Joss Whedon</director>
 	</film>
 
-<film><title>SDX</title><year>210</year><types><type1>asdf</type1><type2>sedfs</type2><type3>sdf</type3></types><time>101 min</time><director>SDs</director></film></movies>
+</movies>

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/deleteMovie.jsp</file>
-            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/index.xhtml</file>
-            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/WEB-INF/web.xml</file>
-            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/search.xhtml</file>
+            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/static/metamorph_lekato/styles.css</file>
+            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/Fragments/contentA.jsp</file>
+            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/Views/Delete.jsp</file>
+            <file>file:/home/nuyuyii/NetBeansProjects/Pro_ST/MovieClient/web/Views/Search.jsp</file>
         </group>
     </open-files>
 </project-private>

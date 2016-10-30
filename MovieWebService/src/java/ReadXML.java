@@ -16,7 +16,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.dom.DOMSource; 
 import javax.xml.transform.stream.StreamResult;
-import static serverpack.mvWebService.callXML;
+//import static serverpack.mvWebService.callXML;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
