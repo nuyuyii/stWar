@@ -20,7 +20,17 @@
         <director>Tod Williams</director>
     </film>
 
-    
+    <film>
+        <title>Insidious</title>
+        <year>2010</year>
+        <types>
+            <type>Fantasy</type>
+            <type>Horror</type>
+            <type>Mystery</type>
+        </types>
+        <time>103 min</time>
+        <director>James Wan</director>
+    </film>
 
     <film>
         <title>Insidious: Chapter 2</title>
@@ -59,12 +69,12 @@
     </film>
 
     <film>
-        <title>Lights Out</title>
-        <year>2016</year>
+        <title>Lights Out Edit</title>
+        <year>2015</year>
         <types>
-            <type>Horror</type>
-        </types>
-        <time>81 min</time>
+            
+        <type>Horror</type><type>action</type></types>
+        <time>120 min</time>
         <director>David F. Sandberg</director>
     </film>
 

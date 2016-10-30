@@ -23,7 +23,6 @@
             <li><a href="Add.jsp">Add Movie</a></li>
             <li><a href="Delete.jsp">Delete</a></li>
             <li><a class="active" href="Edit.jsp">Edit</a></li>
-            <li><a href="About.jsp">About us</a></li>
             </ul>
         </nav>
         </div> 
