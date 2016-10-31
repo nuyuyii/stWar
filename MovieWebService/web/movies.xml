@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="xsltMovie.xsl"?>
-<movies>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><movies>
 
     <film>
         <title>Paranormal Activity</title>
@@ -702,5 +700,3 @@
     </film>
 
 </movies>
-
-

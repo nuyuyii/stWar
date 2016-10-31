@@ -1,7 +1,14 @@
 //package ReadXML;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Scanner;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -31,12 +38,18 @@ import javax.xml.transform.stream.StreamResult;
 public class ReadXML {
     
     public static void main(String[] args) throws Exception {
-        
+        InputStream in = ReadXML.class.getResourceAsStream("/serverpack/movies.xml");
+        //InputStream os = this.getResourceAsStream("web/movies.xml");
         File xmlFile = new File("web/movies.xml");
+        //InputStream inS = ReadXML.class.getResourceAsStream("/serverpack/Updatemoviesj.xml");
         String filepath = "web/Updatemovies.xml";
+        URL url = ReadXML.class.getResource("/serverpack/movies.xml"); //this.getClass().getResourceAsStream("myfile.txt");
+        String path = url.getPath();
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(xmlFile);
+        Document doc = docBuilder.parse(path);
+        
+        System.out.println(url);
         
         NodeList nList = doc.getElementsByTagName("film");
         showNode(nList,60);
@@ -46,14 +59,19 @@ public class ReadXML {
         //showNode(nList,59);
         //getMovie(doc, "1", "Paypal", "Payment", "1000");
         //getMovie(doc, "Pete's Dragon ", "2016", "Animation,Adventure", 102, "David Lowery");
-        editMoive(doc,"Pete's Dragon ", "201", "Animation,Adventure", 102, "David Lowery", 60);
-        showNode(nList,60);
-         // Use a Transformer for output
+        //editMoive(doc,"Pete's Dragon ", "201", "Animation,Adventure", 102, "David Lowery", 60);
+        //showNode(nList,60);
+        // Use a Transformer for output
+        // URL url = ReadXML.class.getResource("/serverpack/UpdatemoviesSr.xml"); 
+        // String path = url.getPath();
+        // System.out.println(path);
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File(filepath));//System.out);
-        transformer.transform(source, result);       
+        StreamResult result = new StreamResult(new File(filepath));
+        //StreamResult result = new StreamResult(new FileOutputStream(xmlFile));
+        //StreamResult result = new StreamResult(inS);//System.out);
+        transformer.transform(source, result);
         
     }
     
@@ -230,24 +248,3 @@ public class ReadXML {
         return node;
     }
 }
-/*  for (int j= 0; j < childfilm.getLength(); j++){
-            Node temp = childfilm.item(j);
-            NodeList childtemp = temp.getChildNodes();
-            if(childtemp.getLength() > 1){
-                for (int i = 0; i<childtemp.getLength();i++){
-                    Node child = childtemp.item(i);
-                    NodeList childnode = child.getChildNodes();
-                    if (child.getNodeName()==""){
-                        System.out.println(temp.getNodeName() + ": " 
-                                + child.getTextContent());
-                    }else if (childnode.getLength()>0){
-                        System.out.println("       " 
-                                + child.getTextContent());
-                    }
-                }                
-            //We got more childs; Let's visit them as well
-            }else if(childtemp.getLength() > 0){
-                System.out.println(temp.getNodeName() + ": " + temp.getTextContent());
-            }
-          }
-          System.out.println("-----------------");*/

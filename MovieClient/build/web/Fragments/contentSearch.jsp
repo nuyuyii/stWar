@@ -60,7 +60,10 @@
                   //for (String id: s.split("")){   }
                   String[] NodeID = s.split("::",3);
                   //int nodeID = Integer.parseInt(NodeID[0]);
-                  out.println("Result: "+NodeID[1]);
+                  if (NodeID[0].equals("Selete Search Pls.")){
+                      out.println(NodeID[1]);
+                  }
+                  
                %> 
                <form action="Delete.jsp" method="POST">
                <input type="hidden" name="number" value="<%=NodeID[1]%>" />

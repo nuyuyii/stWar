@@ -125,16 +125,7 @@
         <director>Steven Spielberg</director>
     </film>
 
-    <film>
-        <title>Indiana Jones and the Temple of Doom</title>
-        <year>1984</year>
-        <types>
-            <type>Action</type>
-            <type>Adventure</type>
-        </types>
-        <time>118 min</time>
-        <director>Steven Spielberg</director>
-    </film>
+    
 
     <film>
         <title>Indiana Jones and the Last Crusade</title>

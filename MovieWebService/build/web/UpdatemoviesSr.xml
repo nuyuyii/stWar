@@ -69,12 +69,12 @@
     </film>
 
     <film>
-        <title>Lights Out Edit</title>
-        <year>2015</year>
+        <title>Lights Out</title>
+        <year>2016</year>
         <types>
-            
-        <type>Horror</type><type>action</type></types>
-        <time>120 min</time>
+            <type>Horror</type>
+        </types>
+        <time>81 min</time>
         <director>David F. Sandberg</director>
     </film>
 
@@ -699,4 +699,4 @@
         <director>Joss Whedon</director>
     </film>
 
-</movies>
+<film><title>title</title><year>2016</year><types><type>dscsd</type></types><time>102 min</time><director>ddddd</director></film></movies>

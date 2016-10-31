@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?xml-stylesheet type="text/xsl" href="xsltMovie.xsl"?><movies>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><movies>
 
     <film>
         <title>Paranormal Activity</title>
@@ -688,15 +688,15 @@
     </film>
 
     <film>
-        <title>Pete's Dragon </title>
-        <year>201</year>
+        <title>The Avengers</title>
+        <year>2012</year>
         <types>
-            
-            
-            
-        <type>Animation</type><type>Adventure</type></types>
-        <time>102min</time>
-        <director>David Lowery</director>
+            <type>Action</type>
+            <type>Thriller</type>
+            <type>Sci-Fi</type>
+        </types>
+        <time>143 min</time>
+        <director>Joss Whedon</director>
     </film>
 
 </movies>
