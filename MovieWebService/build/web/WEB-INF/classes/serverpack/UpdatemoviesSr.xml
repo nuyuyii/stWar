@@ -4,8 +4,8 @@
         <title>Paranormal Activity</title>
         <year>2007</year>
         <types>
-            <type>Horror</type>
-        </types>
+            
+        <type>Horror</type></types>
         <time>86 min</time>
         <director>Oren Peli</director>
     </film>
@@ -125,7 +125,16 @@
         <director>Steven Spielberg</director>
     </film>
 
-    
+    <film>
+        <title>Indiana Jones and the Temple of Doom</title>
+        <year>1984</year>
+        <types>
+            <type>Action</type>
+            <type>Adventure</type>
+        </types>
+        <time>118 min</time>
+        <director>Steven Spielberg</director>
+    </film>
 
     <film>
         <title>Indiana Jones and the Last Crusade</title>
